@@ -1,0 +1,79 @@
+<div class="container">
+  <h2>Rejestracja</h2>
+  <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+    <div>
+      <label for="name">Nazwa użytkownika:</label>
+      <input
+        type="text"
+        id="name"
+        [(ngModel)]="registrationData.name"
+        name="name"
+        required
+        #name="ngModel"
+        [ngClass]="{'ng-invalid ng-dirty': name.invalid && (name.dirty || name.touched)}"
+      >
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+        Nazwa użytkownika jest wymagana.
+      </div>
+    </div>
+
+    <div>
+      <label for="email">Adres email:</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="registrationData.email"
+        name="email"
+        required
+        (ngModelChange)="validateEmail()"
+        [ngClass]="{'ng-invalid ng-dirty': isEmailInvalid}"
+      >
+      <div *ngIf="emailError" class="error">{{ emailError }}</div>
+    </div>
+
+    <div>
+      <label for="password">Hasło:</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="registrationData.password"
+        name="password"
+        required
+        (ngModelChange)="validatePasswordMatch()"
+        [ngClass]="{'ng-invalid ng-dirty': isPasswordInvalid}"
+      >
+    </div>
+
+    <div>
+      <label for="repeatedPassword">Powtórz hasło:</label>
+      <input
+        type="password"
+        id="repeatedPassword"
+        [(ngModel)]="registrationData.repeatedPassword"
+        name="repeatedPassword"
+        required
+        (ngModelChange)="validatePasswordMatch()"
+        [ngClass]="{'ng-invalid ng-dirty': isRepeatedPasswordInvalid}"
+      >
+      <div *ngIf="passwordError" class="error">{{ passwordError }}</div>
+    </div>
+
+    <div>
+      <label for="phone">Numer telefonu:</label>
+      <input
+        type="text"
+        id="phone"
+        [(ngModel)]="registrationData.phoneNumber"
+        name="phoneNumber"
+        required
+        (ngModelChange)="validatePhoneNumber()"
+        [ngClass]="{'ng-invalid ng-dirty': isPhoneNumberInvalid}"
+      >
+      <div *ngIf="phoneNumberError" class="error">{{ phoneNumberError }}</div>
+    </div>
+
+    <button type="submit" [disabled]="!allValid() || !registrationForm.valid">
+      Zarejestruj
+    </button>
+  </form>
+</div>

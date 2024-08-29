@@ -1,0 +1,9 @@
+<div *ngFor="let event of paginatedEvents" class="event-container">
+  <app-event [event]="event"></app-event>
+</div>
+
+<div class="pagination">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">↩</button>
+  <span>Strona {{currentPage}} z {{totalPages}}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">↪</button>
+</div>

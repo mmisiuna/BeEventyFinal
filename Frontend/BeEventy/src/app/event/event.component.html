@@ -1,0 +1,61 @@
+<table class="outer-table">
+  <tr>
+    <td class="image-cell">
+      <div class="sold-out-overlay" *ngIf="event.amountOfAllTickets === 0">
+        WYPRZEDANE
+      </div>
+      <img [src]="'assets/events/' + event.image" (error)="loadImageError($event)" [class]="getImageStyle(event)">
+    </td>
+    <td class="details-cell">
+      <table class="detail-table">
+        <tr>
+          <td colspan="2">
+            <span class="title">{{ event.name }}</span>
+          </td>
+          <td>
+            <div class="location-img" style="font-size: 1vw;">
+              {{ getLocationText(event.location) }} <img [src]="getLocationImage(event.location)" alt="obrazek" [ngStyle]="getLocationImageStyle(event.location)">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="date">{{ event.dateOfStart |  date: 'dd.MM.yyyy' }} - {{ event.dateOfEnd | date: 'dd.MM.yyyy'}}</span>
+          </td>
+          <td>
+            <div class="ticket-price">
+              Bilet już od: <b>{{ lowestTicketPrice !== undefined ? lowestTicketPrice : 'N/A' }} zł</b> 
+            </div>
+          </td>
+          <td>
+            <div class="address"><b>{{ event.address }}</b></div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <div class="address"><b>{{ event.description }}</b></div>
+          </td>
+
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table class="tabelka">
+        <tr>
+          <td colspan="2"><button class="wider-button" style="font-size: 1.6vw;" (click)="showDetails()">↗</button></td>
+        </tr>
+        <tr>
+          <td class="votes" style="background-color: #C6EFCE; color: darkgreen; padding:0.5vw;">{{ event.pluses }}</td>
+          <td><button class="vote-button" (click)="voteUp()" style="color: #C6EFCE; background-color: darkgreen;">+</button></td>
+        </tr>
+        <tr>
+          <td class="votes" style="background-color: #FFC7CE; color: rgb(185, 10, 10);" padding:0.5vw>{{ event.minuses }}</td>
+          <td><button class="vote-button" (click)="voteDown()" style="color: #FFC7CE; background-color: rgb(185, 10, 10);">-</button></td>
+        </tr>
+        <tr>
+          <td colspan="2"><button class="wider-button" (click)="reportThisEvent()" style="color: rgb(185, 10, 10); font-weight: bolder;">!</button></td>
+        </tr>
+      </table>
+    </td>    
+  </tr>
+</table>

@@ -1,0 +1,102 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid black;
+    padding: 0.5vw;
+}
+
+.vote-button {
+    border-radius: 3vw;
+    overflow: hidden;
+    width: 5vw;
+    object-fit: cover;
+    font-size: 1.5vw;
+    border: none;
+    cursor: pointer;    
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.votes {
+    text-align: center; /* Wyśrodkowanie poziome */
+    vertical-align: middle; /* Wyśrodkowanie pionowe */
+    font-size: 1.3vw;
+    line-height: 2vw; /* Dodajemy line-height, aby wyśrodkować liczby pionowo */
+}
+
+.vote-button.green {
+    background-color: #C6EFCE;
+    color: darkgreen;
+}
+
+.vote-button.red {
+    background-color: #FFC7CE;
+    color: rgb(185, 10, 10);
+}
+
+.ticket-component {
+    margin-top: 2vw;
+    padding: 1vw;
+    border-top: 2px solid black;
+}
+
+.ticket-section {
+    margin-bottom: 1vw;
+}
+
+.ticket-section label {
+    display: block;
+    margin-bottom: 0.5vw;
+}
+
+.ticket-section select {
+    width: 20vw;
+    padding: 0.5vw;
+    font-size: 1vw;
+}
+.image-cell img {
+    overflow: hidden;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  
+.ticket-message {
+    text-align: center;
+}
+
+.square-image {
+    width: 15vw;
+    height: 15vw;
+  }
+  
+  .portrait-image {
+    height: 18vw;
+    width: auto;
+  }
+  
+  .landscape-image {
+    width: 18vw;
+    height: auto;
+  }
+  
+  .distributorBtn {
+
+    display: flex;
+    justify-content: center;
+    margin-top: 1vw;
+}
+
+.distributorBtn button {
+    background-color: black;
+    border-radius: 2vw;
+    color: #FCBE1D;
+    padding: 0.5vw 1vw;
+    font-size: 1.2vw; 
+    border: none;
+    cursor: pointer;
+}

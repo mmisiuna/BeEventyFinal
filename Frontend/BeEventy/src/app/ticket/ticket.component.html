@@ -1,0 +1,33 @@
+<table *ngIf="tickets.length > 0">
+    <tr>
+        <th>Nazwa biletu</th>
+        <th>Opis</th>
+        <th>Cena</th>
+        <th *ngIf="isEditMode">Akcje</th>
+    </tr>
+    <tr *ngFor="let ticket of tickets">
+        <td *ngIf="!isEditMode">{{ ticket.name }}</td>
+        <td *ngIf="isEditMode"><input [(ngModel)]="ticket.name" type="text" /></td>
+  
+        <td *ngIf="!isEditMode">{{ ticket.description }}</td>
+        <td *ngIf="isEditMode"><input [(ngModel)]="ticket.description" type="text" /></td>
+        <td *ngIf="!isEditMode">{{ ticket.price }} zł</td>
+
+  
+        <td *ngIf="isEditMode"><input [(ngModel)]="ticket.price" type="number" /></td>
+  
+        <td *ngIf="isEditMode">
+            <button (click)="saveTicket(ticket)" *ngIf="isEditMode" class="action-button">✔️</button>
+            <button (click)="deleteTicket(ticket.id)" *ngIf="isEditMode" class="action-button">❌</button>
+        </td>
+    </tr>
+    <tr *ngIf="isEditMode">
+        <td><input [(ngModel)]="newTicket.name" placeholder="Nowy bilet" type="text" /></td>
+        <td><input [(ngModel)]="newTicket.description" placeholder="Opis" type="text" /></td>
+        <td><input [(ngModel)]="newTicket.price" type="number" placeholder="Cena" /></td>
+        <td colspan="2">
+            <button (click)="addNewTicket()" class="action-button">+</button>
+        </td>
+    </tr>
+  </table>
+  

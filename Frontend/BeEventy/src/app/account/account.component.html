@@ -1,0 +1,42 @@
+<div class="user-profile">
+  <img [src]="'assets/users/' + userData.profileImage" alt="Profile Image" *ngIf="!isEditMode" />
+  <table>
+      <tr>
+          <td><strong>Name:</strong></td>
+          <td>
+              <span *ngIf="!isEditMode">{{ userData.name }}</span>
+              <input *ngIf="isEditMode" [(ngModel)]="userData.name" type="text" />
+          </td>
+      </tr>
+      <tr>
+          <td><strong>Email:</strong></td>
+          <td>
+              <span *ngIf="!isEditMode">{{ userData.email }}</span>
+              <input *ngIf="isEditMode" [(ngModel)]="userData.email" type="text" />
+          </td>
+      </tr>
+      <tr>
+          <td><strong>Phone Number:</strong></td>
+          <td>
+              <span *ngIf="!isEditMode">{{ userData.phoneNumber }}</span>
+              <input *ngIf="isEditMode" [(ngModel)]="userData.phoneNumber" type="text" />
+          </td>
+      </tr>
+      <tr *ngIf="isEditMode">
+          <td><strong>Profile Image:</strong></td>
+          <td>
+              <input type="file" (change)="onFileSelected($event)" />
+          </td>
+      </tr>
+  </table>
+
+  <div *ngIf="isEditMode" class="button-group">
+      <button (click)="saveChanges()">Zapisz</button>
+      <button (click)="cancelEdit()">Anuluj</button>
+  </div>
+
+  <div class="action-buttons" *ngIf="!isEditMode">
+      <button (click)="toggleEditMode()">Edit</button>
+      <button (click)="deactivateUser(userData.id)">Dezaktywuj Konto</button>
+  </div>
+</div>

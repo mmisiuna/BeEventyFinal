@@ -1,0 +1,123 @@
+<table *ngIf="event && !isModeration" style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td colspan="7" style="font-weight: bold; font-size: 1.5vw; background-color: rgb(248, 235, 189);">
+            <div style="position: relative; left: -0.5vw; top: -2.1vw;">
+                <button (click)="goBack()" style="position: absolute; top: 0; left: 0; font-size: 1.5vw; background: none; border: none; cursor: pointer;">↖</button>
+            </div>
+            <div style="text-align: center; font-size: 2vw;">
+                {{ event.name }}
+            </div>
+        </td>
+        <td colspan="3" rowspan="2" style="text-align: center; background-color: rgb(248, 235, 189);" class="image-cell">
+            <img [src]="'assets/events/' + event.image" (error)="loadImageError($event)" alt="Obrazek wydarzenia" style="width:10vw; height: auto;" [class]="getImageStyle(event)">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            {{ event.dateOfStart | date: 'dd.MM.yyyy hh:mm' }} - {{ event.dateOfEnd | date: 'dd.MM.yyyy hh:mm' }}
+        </td>
+        <td colspan="2">
+            {{ lowestTicketPrice !== undefined ? lowestTicketPrice : 'N/A' }} zł - {{ highestTicketPrice !== undefined ? highestTicketPrice : 'N/A' }} zł
+        </td>
+        <td>
+            Dodał: {{  this.authorName }} 
+            </td>
+            <td>
+             {{ event.dateOfUpload | date: 'dd.MM.yyyy hh:mm' }}
+            </td>
+    </tr>
+    <tr>
+        <td colspan="7" rowspan="3" style="padding: 1vw; text-align: justify;">
+            {{ event.description }}
+        </td>
+
+            <td><button class="vote-button" (click)="voteUp()" style="color: #C6EFCE; background-color: darkgreen; ">+</button></td>
+
+        <td><button class="vote-button" (click)="voteDown()" style="color: #FFC7CE; background-color: rgb(185, 10, 10);">-</button></td>
+    </tr>
+    <tr>
+        <td class="votes" style="background-color: #C6EFCE; color: darkgreen; padding:0.5vw;">{{ event.pluses }}</td>
+        <td class="votes" style="background-color: #FFC7CE; color: rgb(185, 10, 10);" padding:0.5vw>{{ event.minuses }}</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;" colspan="2">
+            <button class="vote-button" style="background-color: black; color: rgb(185, 10, 10);" (click)="reportThisEvent()">!</button>
+        </td>
+    </tr>
+</table>
+<table *ngIf="event && isModeration" style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td colspan="7" style="font-weight: bold; font-size: 1.5vw; background-color: rgb(248, 235, 189);">
+            <div style="position: relative; left: -0.5vw; top: -2.1vw;">
+                <button (click)="goBack()" style="position: absolute; top: 0; left: 0; font-size: 1.5vw; background: none; border: none; cursor: pointer;">↖</button>
+            </div>  
+            <div *ngIf="!isEditMode" style="text-align: center; font-size: 2vw;"> {{ event.name }}</div>
+            <div *ngIf="isEditMode"><input *ngIf="isEditMode" [(ngModel)]="eventData.name" type="text" /></div>
+        </td>
+        <td colspan="3" rowspan="2" style="text-align: center; background-color: rgb(248, 235, 189);" class="image-cell">
+            <img [src]="'assets/events/' + event.image" (error)="loadImageError($event)" alt="Obrazek wydarzenia" style="width:10vw; height: auto;" [class]="getImageStyle(event)">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" *ngIf="!isEditMode">
+            {{ eventData.dateOfStart | date: 'dd.MM.yyyy hh:mm' }} - {{ eventData.dateOfEnd | date: 'dd.MM.yyy hh:mm' }}
+        </td>
+        <td *ngIf="isEditMode">
+            <input *ngIf="isEditMode" [(ngModel)]="eventData.dateOfStart" value="eventData.dateOfStart" type="datetime-local" />
+        </td>
+        <td *ngIf="isEditMode">
+            <input *ngIf="isEditMode" [(ngModel)]="eventData.dateOfEnd" value="eventData.dateOfEnd" type="datetime-local" />
+
+        </td>
+        <td colspan="2">
+            {{ lowestTicketPrice !== undefined ? lowestTicketPrice : 'N/A' }} zł - {{ highestTicketPrice !== undefined ? highestTicketPrice : 'N/A' }} zł
+        </td>
+        <td> Dodał: {{  this.authorName }} </td>
+        <td *ngIf="!isEditMode">
+            {{ event.dateOfUpload | date: 'dd.MM.yyyy hh:mm' }}
+        </td>
+        <td *ngIf="isEditMode">
+            <td *ngIf="isEditMode">
+                <input
+                    type="datetime-local"
+                    [(ngModel)]="eventData.dateOfUpload"
+                    id="dateOfUpload"
+                    name="dateOfUpload"
+                />
+            </td>
+    </tr>
+    <tr>
+        <td colspan="7" rowspan="4" *ngIf="!isEditMode" style="padding: 1vw; text-align: justify;">{{ event.description }}</td>
+        <td colspan="7" rowspan="4" *ngIf="isEditMode" style="padding: 1vw; text-align: justify;">
+            <textarea *ngIf="isEditMode" [(ngModel)]="eventData.description" type="text">
+                {{ eventData.description }}
+            </textarea>
+        </td>
+        <td><button class="vote-button" (click)="voteUp()" style="color: #C6EFCE; background-color: darkgreen; ">+</button></td>
+        <td><button class="vote-button" (click)="voteDown()" style="color: #FFC7CE; background-color: rgb(185, 10, 10);">-</button></td>
+    </tr>
+    <tr>
+        <td class="votes" style="background-color: #C6EFCE; color: darkgreen; padding:0.5vw;">{{ event.pluses }}</td>
+        <td class="votes" style="background-color: #FFC7CE; color: rgb(185, 10, 10);" padding:0.5vw>{{ event.minuses }}</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">
+            <button *ngIf="!isEditMode" (click)="toggleEditMode()" class="vote-button" style="background-color:  rgb(248, 235, 189);">🖊️</button>
+            <button *ngIf="isEditMode" (click)="saveChanges()">✔️</button>
+            <button *ngIf="isEditMode" (click)="cancelEdit()">❌</button>
+        </td>
+        <td style="text-align: center;">
+            <button (click)="deleteEvent()" class="vote-button" style="background-color: rgb(248, 235, 189);">🗑️</button>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: center;" colspan="2">
+            <button class="vote-button" style="background-color: black; color: rgb(185, 10, 10);" (click)="reportThisEvent()">!</button>
+        </td>
+    </tr>
+</table>
+<app-ticket></app-ticket><br/>
+<div class = "distributorBtn">
+<button (click)="openDistributorPage()" style="background-color: black; color: #FCBE1D;">
+    Kup bilet u dystrybutora!
+</button></div>

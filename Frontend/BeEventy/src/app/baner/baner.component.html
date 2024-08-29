@@ -1,0 +1,30 @@
+<div class="baner">
+    <a (click)="loadMainPage()">
+      <b>BeEventy</b> 
+      <img src="assets/icon.png" style="width: 4vw; height: 4vw; padding-left: 1vw;padding-bottom: 1vw;"/>
+    </a>
+    <div class="search-bar">
+      <input type="text" class="wider-input" [placeholder]="searchPlaceholder" style="background-color: rgb(254, 247, 218);" (input)="onSearchTermChange()" [(ngModel)]="searchTerm">
+      <button class="search-button" (click)="searchEvents()">
+        <img src="assets/search.png" class="search-img">
+      </button>
+    </div>
+    <div class="buttons-container">
+      <div *ngIf="!isLoggedIn">
+        <button id="login-button" (click)="hideAndNavigateTo('login')">Zaloguj się</button>
+        <button id="registration-button" (click)="hideAndNavigateTo('registration')">Zarejestruj się</button>
+      </div>
+      <div *ngIf="isLoggedIn">
+        <a (click)="this.hideAndNavigateTo('manage')" *ngIf="isAdministrator">
+          <img src="assets/manage.png" class="user-img"></a>
+        <button id="add-button" *ngIf="isModeration" (click)="navigateToAddingEvent()">➕</button>
+        <a (click)="this.hideAndNavigateTo('account')">
+          <img [src]="userImage" class="user-img" (error)="loadImageError($event)">
+          <span class="email-text">{{ userName }}</span>
+        </a>
+        <button id="loggout-button" (click)="onLogout()">Wyloguj</button>
+      </div>   
+    </div>
+  </div>
+
+  

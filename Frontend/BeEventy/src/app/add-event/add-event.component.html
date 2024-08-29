@@ -1,0 +1,33 @@
+<form class="add-event-form" (ngSubmit)="onSubmit()">
+  <div>
+      <label for="name">Nazwa wydarzenia:</label>
+      <input id="name" [(ngModel)]="event.name" name="name" required>
+  </div>
+  <div>
+      <label for="description">Opis:</label>
+      <textarea id="description" [(ngModel)]="event.description" name="description" required></textarea>
+  </div>
+  <div>
+      <label for="dateOfStart">Data rozpoczęcia:</label>
+      <input type="datetime-local" id="dateOfStart" [(ngModel)]="event.dateOfStart" name="dateOfStart" required>
+  </div>
+  <div>
+      <label for="dateOfEnd">Data zakończenia:</label>
+      <input type="datetime-local" id="dateOfEnd" [(ngModel)]="event.dateOfEnd" name="dateOfEnd" required>
+  </div>
+  <div>
+      <label for="location">Lokalizacja:</label>
+      <input id="location" [(ngModel)]="event.location" name="location" required>
+  </div>
+  <div>
+      <label for="address">Adres:</label>
+      <input id="address" [(ngModel)]="event.address" name="address" required>
+  </div>
+  <div>
+      <label for="image">Wybierz obraz wydarzenia:</label>
+      <input type="file" id="image" (change)="onFileSelected($event)" required>
+  </div>
+  <div style="text-align: center;">
+      <button type="submit">Dodaj wydarzenie</button>
+  </div>
+</form>

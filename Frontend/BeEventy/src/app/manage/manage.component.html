@@ -1,0 +1,28 @@
+<table>
+  <tr>
+    <th colspan="2">Użytkownik</th>
+    <th>Aktywny</th>
+    <th>Rola</th>
+    <th>Reset hasła</th>
+  </tr>
+  <tr *ngFor="let user of users">
+    <td>
+      <img [src]="'assets/users/' + user.profileImage" alt="Profile Image" (error)="loadImageError($event)" style="width: 50px; height: 50px; border-radius: 50%;" />
+    <td>{{ user.email }}</td>
+    <td>
+      <input type="checkbox" [checked]="user.activeAccount" id="checkbox-{{user.id}}" (change)="toggleActive(user)" />
+      <label for="checkbox-{{user.id}}"></label>
+    </td>
+    <td>
+      <input type="radio" name="role-{{user.id}}" [value]="0" [checked]="user.accountType === 0" id="role-0-{{user.id}}" (change)="changePermission(user, 0)" />
+      <label for="role-0-{{user.id}}"> Użytkownik </label>
+      <input type="radio" name="role-{{user.id}}" [value]="1" [checked]="user.accountType === 1" id="role-1-{{user.id}}" (change)="changePermission(user, 1)" />
+      <label for="role-1-{{user.id}}"> Moderator </label>
+      <input type="radio" name="role-{{user.id}}" [value]="2" [checked]="user.accountType === 2" id="role-2-{{user.id}}" (change)="changePermission(user, 2)" />
+      <label for="role-2-{{user.id}}"> Administrator </label>
+    </td>
+    <td>
+      <button [ngClass]="{ 'reset-warning': user.forgottenPassword }" (click)="resetPassword(user.email)">♻</button>
+    </td>
+  </tr>
+</table>

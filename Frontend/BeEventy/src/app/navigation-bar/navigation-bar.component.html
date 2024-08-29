@@ -1,0 +1,8 @@
+<div id="navigation-bar">
+  <div class="buttons">
+    <button class="btn" [ngClass]="{'active': sortType === 'date'}" (click)="sortByDates()"><b>Najnowsze</b></button>
+    <button class="btn" [ngClass]="{'active': sortType === 'votes'}" (click)="sortByVotes()"><b>Popularne</b></button>
+    <button class="btn" [ngClass]="{'active': sortType === 'closest'}" (click)="sortByClosests()"><b>Najbliższe</b></button>
+    <button class="btn" *ngIf="isModeration" [ngClass]="{'active': sortType === 'reports'}" (click)="getEventsToVerify()"><b>Do Weryfikacji</b></button> 
+  </div>
+</div>

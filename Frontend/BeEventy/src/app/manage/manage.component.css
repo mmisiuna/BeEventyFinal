@@ -1,0 +1,85 @@
+  table {
+      width: 100%;
+      border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 0.5vw;
+    text-align: left;
+  }
+  
+  th {
+    background-color: black;
+    color: #f0b013;
+  }
+  
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  button.reset-warning {
+    background-color: #FCBE1D;
+  }
+  
+  button.reset-warning:hover {
+    background-color: #f0b013;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+      opacity: 0;
+      position: absolute;
+      padding: 1vw;
+      margin: 1vw;
+  }
+
+  input[type="checkbox"] + label,
+  input[type="radio"] + label {
+      position: relative;
+      padding-left: 25px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+
+  input[type="checkbox"] + label::before,
+  input[type="radio"] + label::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #FCBE1D;
+      background-color: white;
+      border-radius: 4px;
+  }
+
+  input[type="radio"] + label::before {
+      border-radius: 50%;
+  }
+
+  input[type="checkbox"]:checked + label::before {
+      background-color: #FCBE1D;
+      border-color: #FCBE1D;
+      content: '✔';
+      color: black;
+      text-align: center;
+      line-height: 16px;
+      transform: translateY(-0.5vw);
+  }
+
+  input[type="radio"]:checked + label::before {
+      background-color: #FCBE1D;
+      border-color: #FCBE1D;
+  }
+
+  input[type="checkbox"] + label,
+  input[type="radio"] + label {
+      position: relative;
+      padding-left: 2vw;
+      cursor: pointer;
+      font-size: 1vw;
+      margin-right: 1vw;
+  }
